@@ -1,0 +1,2 @@
+/usr/bin/java -ea -jar target/mmtk/mmtk-harness.jar MMTk/harness/test-scripts/Quicksort.script plan=org.mmtk.plan.generational.immix.GenImmix variableSizeHeap=false initHeap=5m
+Unable to access jarfile target/mmtk/mmtk-harness.jar

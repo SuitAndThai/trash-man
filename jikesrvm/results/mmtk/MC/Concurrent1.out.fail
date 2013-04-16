@@ -1,0 +1,2 @@
+/usr/bin/java -ea -jar target/mmtk/mmtk-harness.jar MMTk/harness/test-scripts/Concurrent1.script plan=org.mmtk.plan.markcompact.MC variableSizeHeap=false
+Unable to access jarfile target/mmtk/mmtk-harness.jar

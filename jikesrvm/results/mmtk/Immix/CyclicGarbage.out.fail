@@ -1,0 +1,2 @@
+/usr/bin/java -ea -jar target/mmtk/mmtk-harness.jar MMTk/harness/test-scripts/CyclicGarbage.script plan=org.mmtk.plan.immix.Immix variableSizeHeap=false
+Unable to access jarfile target/mmtk/mmtk-harness.jar

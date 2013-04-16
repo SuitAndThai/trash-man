@@ -1,0 +1,2 @@
+/usr/bin/java -ea -jar target/mmtk/mmtk-harness.jar MMTk/harness/test-scripts/Lists.script plan=org.mmtk.plan.generational.marksweep.GenMS variableSizeHeap=false initHeap=5m
+Unable to access jarfile target/mmtk/mmtk-harness.jar
