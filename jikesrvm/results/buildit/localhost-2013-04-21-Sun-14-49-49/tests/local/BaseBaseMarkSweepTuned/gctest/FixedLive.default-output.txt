@@ -1,0 +1,23 @@
+FixedLive running with 30 Mb fixed live data
+
+Estimated object size of a 4-field object (2 int, 2 ref) is 24 bytes
+Header size is probably 8 bytes
+Note that the results of this test are not too meaningful for a generational collector
+Creating live data: tree with 1310720 nodes
+Allocating 2048 Mb or until 5 GCs have occurred or until we would exceed 200.0 secs.
+First 0GC's are excluded from overall statistics
+
+GC occurred (2.873 s) after 2.23s : tracing rate = 10.4425 Mb/s   allocation rate = 28.2125 Mb/s
+GC occurred (0.201 s) after 0.002s : tracing rate = 149.2535 Mb/s   allocation rate = 65.5365 Mb/s
+GC occurred (2.681 s) after 3.705s : tracing rate = 11.1895 Mb/s   allocation rate = 30.9905 Mb/s
+GC occurred (0.212 s) after 0.001s : tracing rate = 141.5095 Mb/s   allocation rate = 131.0725 Mb/s
+GC occurred (3.304 s) after 3.849s : tracing rate = 9.0795 Mb/s   allocation rate = 30.6825 Mb/s
+
+         Tracing rate: 64.2945 Mb/s, sigma 66.2555 Mb/s, z-score 1.0305
+      Allocation rate: 57.2985 Mb/s, sigma 39.3875 Mb/s, z-score 0.6875
+
+     Total Setup Time: 2.2595 s
+Total Allocation Time: 9.7865 s
+   Total Tracing Time: 9.2715 s
+
+Overall: SUCCESS

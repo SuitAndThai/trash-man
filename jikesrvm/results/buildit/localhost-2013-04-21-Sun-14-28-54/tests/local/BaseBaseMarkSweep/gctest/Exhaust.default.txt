@@ -1,0 +1,23 @@
+Max heap size: 78643200 bytes
+  that's 75.0 megabytes
+Starting round 1 with size = 64
+  Allocating until exception thrown
+  Caught OutOfMemory - freeing now
+  Had 57266112 bytes allocated; failed trying to allocate 64 bytes
+Starting round 2 with size = 640
+  Allocating until exception thrown
+  Caught OutOfMemory - freeing now
+  Had 56113280 bytes allocated; failed trying to allocate 640 bytes
+Starting round 3 with size = 6400
+  Allocating until exception thrown
+  Caught OutOfMemory - freeing now
+  Had 56089600 bytes allocated; failed trying to allocate 6400 bytes
+Starting round 4 with size = 64000
+  Allocating until exception thrown
+  Caught OutOfMemory - freeing now
+  Had 70080000 bytes allocated; failed trying to allocate 64000 bytes
+Starting round 5 with size = 640000
+  Allocating until exception thrown
+  Caught OutOfMemory - freeing now
+  Had 71040000 bytes allocated; failed trying to allocate 640000 bytes
+Overall: SUCCESS

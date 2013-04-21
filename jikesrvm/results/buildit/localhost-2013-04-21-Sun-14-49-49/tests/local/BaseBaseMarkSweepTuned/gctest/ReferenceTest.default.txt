@@ -1,0 +1,14 @@
+ReferenceTest checking available size of heap (Mb): 47.300000000000004
+
+Checking weak references and reference queue
+Fraction of weak references before GC still live = 1.0     PASS
+Fraction of weak references after  GC still live = 0.0     PASS
+
+Checking soft references and reference queue
+Fraction of soft references before GC still live = 1.0     PASS
+Caught OutOfMemoryError
+Fraction of soft references after  GC still live = 0.0     PASS   POOR
+
+ReferenceTest checking available size of heap (Mb): 126.4
+
+Overall: SUCCESS

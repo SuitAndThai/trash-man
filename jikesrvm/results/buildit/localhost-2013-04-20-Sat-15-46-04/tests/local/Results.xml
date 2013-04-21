@@ -1,0 +1,23 @@
+<results version="1.1">
+<name>local</name>
+<variant>local</variant>
+<revision></revision>
+<start-time>2013-04-20T19:46:06Z</start-time>
+<end-time>2013-04-20T19:46:07Z</end-time>
+<parameters>
+</parameters>
+<host>
+<name>garby.csse.rose-hulman.edu</name>
+<parameters>
+</parameters>
+</host>
+<test-configuration>
+<build-configuration>BaseBaseMarkSweep</build-configuration>
+<name>default</name>
+<parameters>
+<parameter key="mode" value="/home/csse/trash-man/jikesrvm/dist/BaseBaseMarkSweep_ia32-linux"/>
+<parameter key="mode" value=""/>
+</parameters>
+
+</test-configuration>
+</results>

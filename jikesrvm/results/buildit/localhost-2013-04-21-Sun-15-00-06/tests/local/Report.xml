@@ -1,0 +1,248 @@
+<report version="1.1">
+<name>local</name>
+<variant>local</variant>
+<revision/>
+<start-time>2013-04-21T19:02:31Z</start-time>
+<end-time>2013-04-21T19:04:23Z</end-time>
+<parameters>
+</parameters>
+<host>
+<name>garby.csse.rose-hulman.edu</name>
+<parameters>
+</parameters>
+</host>
+<build-target>
+<name>ia32-linux</name>
+<parameters>
+<parameter key="target.arch" value="ia32"/>
+<parameter key="target.address.size" value="32"/>
+<parameter key="target.os" value="Linux"/>
+<parameter key="target.bootimage.code.address" value="0x5B000000"/>
+<parameter key="target.bootimage.data.address" value="0x57000000"/>
+<parameter key="target.bootimage.rmap.address" value="0x5E000000"/>
+<parameter key="target.max-mappable.address" value="0xa0000000"/>
+<parameter key="target.arch.sse2" value="full"/>
+</parameters>
+<build-configuration>
+<name>BaseBaseMarkSweepTuned</name>
+<parameters/>
+<duration>0</duration>
+<result>SUCCESS</result>
+<output>Builds are being skipped</output>
+<test-configuration>
+<name>default</name>
+<parameters>
+<parameter key="mode" value="/home/csse/trash-man/jikesrvm/dist/BaseBaseMarkSweepTuned_ia32-linux"/>
+<parameter key="mode" value=""/>
+</parameters>
+<group>
+<name>gctest</name>
+<test>
+<name>InlineAllocation</name>
+<command>cd /home/csse/trash-man/jikesrvm/target/tests/local/BaseBaseMarkSweepTuned/gctest &amp;amp;&amp;amp; /home/csse/trash-man/jikesrvm/dist/BaseBaseMarkSweepTuned_ia32-linux/rvm -X:vm:errorsFatal=true  -Xms60M -Xmx150M      -classpath "/home/csse/trash-man/jikesrvm/target/tests/local/BaseBaseMarkSweepTuned/gctest/classes" InlineAllocation base</command>
+<parameters>
+<parameter key="initial.heapsize" value="60"/>
+<parameter key="max.heapsize" value="150"/>
+<parameter key="time.limit" value="300"/>
+<parameter key="extra.args" value=""/>
+<parameter key="extra.rvm.args" value=""/>
+<parameter key="processors" value="all"/>
+<parameter key="max.opt.level" value=""/>
+</parameters>
+<test-execution>
+<name>default</name>
+<exit-code>0</exit-code>
+<duration>882</duration>
+<result>SUCCESS</result>
+<result-explanation/>
+<output>Approximate scalar allocation size is 38
+Approximate small array allocation is 28
+Approximate large array allocation is 32
+Approximate unknown size array allocation is 31
+Overall: SUCCESS
+</output>
+</test-execution>
+</test>
+<test>
+<name>ReferenceTest</name>
+<command>cd /home/csse/trash-man/jikesrvm/target/tests/local/BaseBaseMarkSweepTuned/gctest &amp;amp;&amp;amp; /home/csse/trash-man/jikesrvm/dist/BaseBaseMarkSweepTuned_ia32-linux/rvm -X:vm:errorsFatal=true  -Xms60M -Xmx150M      -classpath "/home/csse/trash-man/jikesrvm/target/tests/local/BaseBaseMarkSweepTuned/gctest/classes" ReferenceTest base</command>
+<parameters>
+<parameter key="initial.heapsize" value="60"/>
+<parameter key="max.heapsize" value="150"/>
+<parameter key="time.limit" value="300"/>
+<parameter key="extra.args" value=""/>
+<parameter key="extra.rvm.args" value=""/>
+<parameter key="processors" value="all"/>
+<parameter key="max.opt.level" value=""/>
+</parameters>
+<test-execution>
+<name>default</name>
+<exit-code>0</exit-code>
+<duration>26761</duration>
+<result>SUCCESS</result>
+<result-explanation/>
+<output>ReferenceTest checking available size of heap (Mb): 47.300000000000004
+
+Checking weak references and reference queue
+Fraction of weak references before GC still live = 1.0     PASS
+Fraction of weak references after  GC still live = 0.0     PASS
+
+Checking soft references and reference queue
+Fraction of soft references before GC still live = 1.0     PASS
+Caught OutOfMemoryError
+Fraction of soft references after  GC still live = 0.0     PASS   POOR
+
+ReferenceTest checking available size of heap (Mb): 126.4
+
+Overall: SUCCESS
+</output>
+</test-execution>
+</test>
+<test>
+<name>ReferenceStress</name>
+<command>cd /home/csse/trash-man/jikesrvm/target/tests/local/BaseBaseMarkSweepTuned/gctest &amp;amp;&amp;amp; /home/csse/trash-man/jikesrvm/dist/BaseBaseMarkSweepTuned_ia32-linux/rvm -X:vm:errorsFatal=true  -Xms60M -Xmx150M      -classpath "/home/csse/trash-man/jikesrvm/target/tests/local/BaseBaseMarkSweepTuned/gctest/classes" ReferenceStress base</command>
+<parameters>
+<parameter key="initial.heapsize" value="60"/>
+<parameter key="max.heapsize" value="150"/>
+<parameter key="time.limit" value="300"/>
+<parameter key="extra.args" value=""/>
+<parameter key="extra.rvm.args" value=""/>
+<parameter key="processors" value="all"/>
+<parameter key="max.opt.level" value=""/>
+</parameters>
+<test-execution>
+<name>default</name>
+<exit-code>0</exit-code>
+<duration>4125</duration>
+<result>SUCCESS</result>
+<result-explanation/>
+<output>Running 2 threads with 5000 entries for 100 iterations
+500200 references inserted in 3336ms.
+Overall: SUCCESS
+</output>
+</test-execution>
+</test>
+<test>
+<name>FixedLive</name>
+<command>cd /home/csse/trash-man/jikesrvm/target/tests/local/BaseBaseMarkSweepTuned/gctest &amp;amp;&amp;amp; /home/csse/trash-man/jikesrvm/dist/BaseBaseMarkSweepTuned_ia32-linux/rvm -X:vm:errorsFatal=true  -Xms120M -Xmx150M      -classpath "/home/csse/trash-man/jikesrvm/target/tests/local/BaseBaseMarkSweepTuned/gctest/classes" FixedLive base</command>
+<parameters>
+<parameter key="initial.heapsize" value="120"/>
+<parameter key="max.heapsize" value="150"/>
+<parameter key="time.limit" value="300"/>
+<parameter key="extra.args" value=""/>
+<parameter key="extra.rvm.args" value=""/>
+<parameter key="processors" value="all"/>
+<parameter key="max.opt.level" value=""/>
+</parameters>
+<test-execution>
+<name>default</name>
+<exit-code>0</exit-code>
+<duration>21763</duration>
+<result>SUCCESS</result>
+<result-explanation/>
+<output>FixedLive running with 30 Mb fixed live data
+
+Estimated object size of a 4-field object (2 int, 2 ref) is 24 bytes
+Header size is probably 8 bytes
+Note that the results of this test are not too meaningful for a generational collector
+Creating live data: tree with 1310720 nodes
+Allocating 2048 Mb or until 5 GCs have occurred or until we would exceed 200.0 secs.
+First 0GC's are excluded from overall statistics
+
+GC occurred (2.811 s) after 2.214s : tracing rate = 10.6725 Mb/s   allocation rate = 28.4165 Mb/s
+GC occurred (0.213 s) after 0.003s : tracing rate = 140.8455 Mb/s   allocation rate = 43.6905 Mb/s
+GC occurred (2.881 s) after 3.631s : tracing rate = 10.4135 Mb/s   allocation rate = 31.6215 Mb/s
+GC occurred (0.206 s) after 0.001s : tracing rate = 145.6315 Mb/s   allocation rate = 131.0725 Mb/s
+GC occurred (3.094 s) after 3.615s : tracing rate = 9.6965 Mb/s   allocation rate = 32.6685 Mb/s
+
+         Tracing rate: 63.4515 Mb/s, sigma 65.1635 Mb/s, z-score 1.0265
+      Allocation rate: 53.4935 Mb/s, sigma 39.1295 Mb/s, z-score 0.7315
+
+     Total Setup Time: 2.2375 s
+Total Allocation Time: 9.4645 s
+   Total Tracing Time: 9.2055 s
+
+Overall: SUCCESS
+</output>
+</test-execution>
+</test>
+<test>
+<name>LargeAlloc</name>
+<command>cd /home/csse/trash-man/jikesrvm/target/tests/local/BaseBaseMarkSweepTuned/gctest &amp;amp;&amp;amp; /home/csse/trash-man/jikesrvm/dist/BaseBaseMarkSweepTuned_ia32-linux/rvm -X:vm:errorsFatal=true  -Xms60M -Xmx150M      -classpath "/home/csse/trash-man/jikesrvm/target/tests/local/BaseBaseMarkSweepTuned/gctest/classes" LargeAlloc base</command>
+<parameters>
+<parameter key="initial.heapsize" value="60"/>
+<parameter key="max.heapsize" value="150"/>
+<parameter key="time.limit" value="300"/>
+<parameter key="extra.args" value=""/>
+<parameter key="extra.rvm.args" value=""/>
+<parameter key="processors" value="all"/>
+<parameter key="max.opt.level" value=""/>
+</parameters>
+<test-execution>
+<name>default</name>
+<exit-code>0</exit-code>
+<duration>25139</duration>
+<result>SUCCESS</result>
+<result-explanation/>
+<output>LargeAlloc running with 500 Mb of allocation
+Run with verbose GC on and make sure space accounting is not leaking
+
+Allocated 100 Mb at time 5.257 sec
+Allocated 200 Mb at time 10.064 sec
+Allocated 300 Mb at time 14.877 sec
+Allocated 400 Mb at time 19.488 sec
+
+After allocation, usedMemory has increased by 0.59765625 Mb
+Overall: SUCCESS
+</output>
+</test-execution>
+</test>
+<test>
+<name>Exhaust</name>
+<command>cd /home/csse/trash-man/jikesrvm/target/tests/local/BaseBaseMarkSweepTuned/gctest &amp;amp;&amp;amp; /home/csse/trash-man/jikesrvm/dist/BaseBaseMarkSweepTuned_ia32-linux/rvm -X:vm:errorsFatal=true  -Xms50M -Xmx75M      -classpath "/home/csse/trash-man/jikesrvm/target/tests/local/BaseBaseMarkSweepTuned/gctest/classes" Exhaust base</command>
+<parameters>
+<parameter key="initial.heapsize" value="50"/>
+<parameter key="max.heapsize" value="75"/>
+<parameter key="time.limit" value="300"/>
+<parameter key="extra.args" value=""/>
+<parameter key="extra.rvm.args" value=""/>
+<parameter key="processors" value="all"/>
+<parameter key="max.opt.level" value=""/>
+</parameters>
+<test-execution>
+<name>default</name>
+<exit-code>0</exit-code>
+<duration>30929</duration>
+<result>SUCCESS</result>
+<result-explanation/>
+<output>Max heap size: 78643200 bytes
+  that's 75.0 megabytes
+Starting round 1 with size = 64
+  Allocating until exception thrown
+  Caught OutOfMemory - freeing now
+  Had 57262848 bytes allocated; failed trying to allocate 64 bytes
+Starting round 2 with size = 640
+  Allocating until exception thrown
+  Caught OutOfMemory - freeing now
+  Had 56113280 bytes allocated; failed trying to allocate 640 bytes
+Starting round 3 with size = 6400
+  Allocating until exception thrown
+  Caught OutOfMemory - freeing now
+  Had 56089600 bytes allocated; failed trying to allocate 6400 bytes
+Starting round 4 with size = 64000
+  Allocating until exception thrown
+  Caught OutOfMemory - freeing now
+  Had 70080000 bytes allocated; failed trying to allocate 64000 bytes
+Starting round 5 with size = 640000
+  Allocating until exception thrown
+  Caught OutOfMemory - freeing now
+  Had 71040000 bytes allocated; failed trying to allocate 640000 bytes
+Overall: SUCCESS
+</output>
+</test-execution>
+</test>
+</group>
+</test-configuration>
+</build-configuration>
+</build-target>
+</report>

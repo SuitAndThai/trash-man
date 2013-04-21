@@ -1,0 +1,10 @@
+LargeAlloc running with 500 Mb of allocation
+Run with verbose GC on and make sure space accounting is not leaking
+
+Allocated 100 Mb at time 6.984 sec
+Allocated 200 Mb at time 16.938 sec
+Allocated 300 Mb at time 25.358 sec
+Allocated 400 Mb at time 31.479 sec
+
+After allocation, usedMemory has increased by 0.59765625 Mb
+Overall: SUCCESS

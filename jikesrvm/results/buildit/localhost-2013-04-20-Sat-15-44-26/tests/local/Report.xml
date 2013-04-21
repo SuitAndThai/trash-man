@@ -1,0 +1,41 @@
+<report version="1.1">
+<name>local</name>
+<variant>local</variant>
+<revision/>
+<start-time>2013-04-20T19:44:29Z</start-time>
+<end-time>2013-04-20T19:45:21Z</end-time>
+<parameters>
+</parameters>
+<host>
+<name>garby.csse.rose-hulman.edu</name>
+<parameters>
+</parameters>
+</host>
+<build-target>
+<name>ia32-linux</name>
+<parameters>
+<parameter key="target.arch" value="ia32"/>
+<parameter key="target.address.size" value="32"/>
+<parameter key="target.os" value="Linux"/>
+<parameter key="target.bootimage.code.address" value="0x5B000000"/>
+<parameter key="target.bootimage.data.address" value="0x57000000"/>
+<parameter key="target.bootimage.rmap.address" value="0x5E000000"/>
+<parameter key="target.max-mappable.address" value="0xa0000000"/>
+<parameter key="target.arch.sse2" value="full"/>
+</parameters>
+<build-configuration>
+<name>BaseBaseMarkSweep</name>
+<parameters/>
+<duration>0</duration>
+<result>SUCCESS</result>
+<output>Builds are being skipped</output>
+<test-configuration>
+<name>default</name>
+<parameters>
+<parameter key="mode" value="/home/csse/trash-man/jikesrvm/dist/BaseBaseMarkSweep_ia32-linux"/>
+<parameter key="mode" value=""/>
+</parameters>
+</test-configuration>
+</build-configuration>
+</build-target>
+</report>
