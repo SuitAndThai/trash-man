@@ -27,6 +27,8 @@ For mark sweep collector, marking is done by tracing the heap. Tracing starts fr
 
 We'll be looking at processPhaseStack method in Phase.java in order to better understand how the phases are executed.
 
+We also asked the community how to get the MMtk test harness working, as we could not get it built. They responded, and so we are attempting to use that to understand the code flow.
+
 We are also trying to explore the code with the gdb debugger. Getting this working will allow us to watch the execution of of code and see the various calls. We are currently having problems setting breakpoints correctly. To set a breakpoint the associated part of memory must be loaded. Furthermore, one must examine the memory map to find the address in memory. We contacted the mailing list about this and recieved some valuable feedback. They indicated some places where breakpoints can be set that allow access to more parts of the code. We now can set breakpoints in some parts of the code but other sections are currently inaccessable. It should just be a matter of finding memory accessable addresses to break at and using those breakpoints to access areas we are interested in.
 
 
