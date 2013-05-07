@@ -16,6 +16,7 @@ import org.mmtk.plan.StopTheWorldConstraints;
 
 import org.mmtk.policy.MarkSweepSpace;
 import org.mmtk.policy.SegregatedFreeListSpace;
+import org.mmtk.utility.Log;
 
 import org.vmmagic.pragma.*;
 
@@ -28,11 +29,24 @@ import org.vmmagic.pragma.*;
 @Uninterruptible
 public class MSTunedConstraints extends StopTheWorldConstraints {
   @Override
-  public int gcHeaderBits() { return MarkSweepSpace.LOCAL_GC_BITS_REQUIRED; }
+  public int gcHeaderBits() {
+	  Log.writeln("MSTunedConstraints: In the gcHeaderBits method");
+	  return MarkSweepSpace.LOCAL_GC_BITS_REQUIRED;
+  }
   @Override
-  public int gcHeaderWords() { return MarkSweepSpace.GC_HEADER_WORDS_REQUIRED; }
+  public int gcHeaderWords() {
+	  Log.writeln("MSTunedConstraints: In the gcHeaderWords method");
+	  return MarkSweepSpace.GC_HEADER_WORDS_REQUIRED;
+  }
   @Override
-  public int maxNonLOSDefaultAllocBytes() { return SegregatedFreeListSpace.MAX_FREELIST_OBJECT_BYTES; }
+  public int maxNonLOSDefaultAllocBytes() {
+	  Log.writeln("MSTunedConstraints: In the maxNonLOSDefaultAllocBytes method");
+	  return SegregatedFreeListSpace.MAX_FREELIST_OBJECT_BYTES;
+  }
+  
   @Override
-  public int numSpecializedScans() { return 1; }
+  public int numSpecializedScans() {
+	  Log.writeln("MSTunedConstraints: In the numSpecializedScans method");
+	  return 1;
+  }
 }

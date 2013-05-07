@@ -16,6 +16,7 @@ import org.mmtk.plan.TraceLocal;
 import org.mmtk.plan.Trace;
 import org.mmtk.policy.Space;
 import org.mmtk.utility.HeaderByte;
+import org.mmtk.utility.Log;
 import org.mmtk.utility.deque.ObjectReferenceDeque;
 
 import org.vmmagic.pragma.*;
@@ -53,6 +54,7 @@ public final class MSTunedTraceLocal extends TraceLocal {
    */
   @Override
   public boolean isLive(ObjectReference object) {
+	  Log.writeln("MSTunedTraceLocal: In isLive");
     if (object.isNull()) return false;
     if (Space.isInSpace(MSTuned.MARK_SWEEP, object)) {
       return MSTuned.msSpace.isLive(object);
@@ -77,6 +79,7 @@ public final class MSTunedTraceLocal extends TraceLocal {
   @Inline
   @Override
   public ObjectReference traceObject(ObjectReference object) {
+	  Log.writeln("MSTunedTraceLocal: In traceObject");
     if (object.isNull()) return object;
     if (Space.isInSpace(MSTuned.MARK_SWEEP, object))
       return MSTuned.msSpace.traceObject(this, object);
@@ -89,6 +92,7 @@ public final class MSTunedTraceLocal extends TraceLocal {
    * (we don't enqueue for scanning since we're doing a full heap GC).
    */
   protected void processRememberedSets() {
+	  Log.writeln("MSTunedTraceLocal: In processRememberedSets");
     if (modBuffer != null) {
       logMessage(5, "clearing modBuffer");
       while (!modBuffer.isEmpty()) {

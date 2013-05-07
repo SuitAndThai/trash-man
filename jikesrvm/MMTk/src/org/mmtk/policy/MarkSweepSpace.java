@@ -25,6 +25,8 @@ import org.mmtk.vm.VM;
 import org.vmmagic.pragma.*;
 import org.vmmagic.unboxed.*;
 
+import org.mmtk.utility.Log;
+
 /**
  * Each instance of this class corresponds to one mark-sweep *space*.
  * Each of the instance methods of this class may be called by any
@@ -256,8 +258,6 @@ public final class MarkSweepSpace extends SegregatedFreeListSpace implements Con
    */
   @Inline
   public ObjectReference traceObject(TransitiveClosure trace, ObjectReference object) {
-	  //TODO remove print statement
-	  //System.out.println("DEBUG: tracing");
     if (HEADER_MARK_BITS) {
       if (testAndMark(object)) {
         markBlock(object);
@@ -265,8 +265,6 @@ public final class MarkSweepSpace extends SegregatedFreeListSpace implements Con
       }
     } else {
       if (testAndSetLiveBit(object)) {
-    	  //TODO remove print statement
-    	  //System.out.println("DEBUG: bitmap marking");
         trace.processNode(object);
       }
     }

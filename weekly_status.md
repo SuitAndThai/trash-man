@@ -5,6 +5,12 @@ Week 3 (5/7)
 ------------
 In progress.
 
+Despite our efforts we have made no further progress on setting meaningful breakpoints with gdb. The jikes community indicated that debugging with gdb is not very valuable and generally "tedious". I've suspended my work with gdb to focus on exploring the code.
+
+We now have a better understanding of the structure of the Mark Sweep collector. Particularly we have improved of understanding of the differnt phases and where they are executed. We also now have a better understanding of the general structure of Jikes and how different collectors are controlled on the top level.
+
+We started exploring how to implement lazy sweeping. To this end we investigated the control of the sweep step and the connection between the mutator and the collector. While we were doing this we found that lazy sweeping was already implemented and only needs to be enabled.
+
 Week 2 (4/30)
 -------------
 We've been reaching out to the community in order to better understand how garbage collectors are implemented in JikesRVM.

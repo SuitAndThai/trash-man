@@ -13,8 +13,9 @@
 package org.mmtk.plan.marksweeptuned;
 
 import org.mmtk.plan.*;
-import org.mmtk.policy.MarkSweepLocal;
+import org.mmtk.policy.MarkSweepTunedLocal;
 import org.mmtk.policy.Space;
+import org.mmtk.utility.Log;
 import org.mmtk.utility.alloc.Allocator;
 
 import org.vmmagic.pragma.*;
@@ -40,7 +41,7 @@ public class MSTunedMutator extends StopTheWorldMutator {
   /****************************************************************************
    * Instance fields
    */
-  protected MarkSweepLocal ms = new MarkSweepLocal(MSTuned.msSpace);
+  protected MarkSweepTunedLocal ms = new MarkSweepTunedLocal(MSTuned.msSpace);
 
 
   /****************************************************************************
@@ -61,6 +62,7 @@ public class MSTunedMutator extends StopTheWorldMutator {
   @Inline
   @Override
   public Address alloc(int bytes, int align, int offset, int allocator, int site) {
+	  Log.writeln("MSTunedMutator: In alloc");
     if (allocator == MSTuned.ALLOC_DEFAULT) {
       return ms.alloc(bytes, align, offset);
     }
@@ -81,6 +83,7 @@ public class MSTunedMutator extends StopTheWorldMutator {
   @Override
   public void postAlloc(ObjectReference ref, ObjectReference typeRef,
       int bytes, int allocator) {
+	  Log.writeln("MSTunedMutator: In postAlloc");
     if (allocator == MSTuned.ALLOC_DEFAULT)
       MSTuned.msSpace.postAlloc(ref);
     else
@@ -98,6 +101,7 @@ public class MSTunedMutator extends StopTheWorldMutator {
    */
   @Override
   public Allocator getAllocatorFromSpace(Space space) {
+	  Log.writeln("MSTunedMutator: In getAllocatorFromSpace");
     if (space == MSTuned.msSpace) return ms;
     return super.getAllocatorFromSpace(space);
   }
@@ -116,13 +120,16 @@ public class MSTunedMutator extends StopTheWorldMutator {
   @Inline
   @Override
   public void collectionPhase(short phaseId, boolean primary) {
+	  
     if (phaseId == MSTuned.PREPARE) {
+    	Log.writeln("MSTunedMutator: In collectionPhase PREPARE");
       super.collectionPhase(phaseId, primary);
       ms.prepare();
       return;
     }
 
     if (phaseId == MSTuned.RELEASE) {
+    	Log.writeln("MSTunedMutator: In collectionPhase RELEASE");
       ms.release();
       super.collectionPhase(phaseId, primary);
       return;
@@ -137,6 +144,7 @@ public class MSTunedMutator extends StopTheWorldMutator {
    */
   @Override
   public void flush() {
+	  Log.writeln("MSTunedMutator: In flush");
     super.flush();
     ms.flush();
   }

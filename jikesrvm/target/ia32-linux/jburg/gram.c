@@ -1,7 +1,7 @@
 #define YY_parse_h_included
 /*#define YY_USE_CLASS 
 */
-/*  A Bison++ parser, made from /home/csse/jikesrvm-3.1.2-thairp/rvm/src-generated/opt-burs/jburg/gram.y  */
+/*  A Bison++ parser, made from /home/csse/trash-man/jikesrvm/rvm/src-generated/opt-burs/jburg/gram.y  */
 
  /* with Bison++ version bison++ Version 1.21.9-1, adapted from GNU bison by coetmeur@icdc.fr
 Maintained by Magnus Ekdahl <magnus@debian.org>
@@ -98,7 +98,7 @@ Maintained by Magnus Ekdahl <magnus@debian.org>
 #define YYBISON 1  
 
  #line 88 "/usr/share/bison++/bison.cc"
-#line 1 "/home/csse/jikesrvm-3.1.2-thairp/rvm/src-generated/opt-burs/jburg/gram.y"
+#line 1 "/home/csse/trash-man/jikesrvm/rvm/src-generated/opt-burs/jburg/gram.y"
 
 /*
  * (C) Copyright IBM Corp. 2001
@@ -109,7 +109,7 @@ Maintained by Magnus Ekdahl <magnus@debian.org>
 static int yylineno = 0;
 static int yylex(void);
 
-#line 11 "/home/csse/jikesrvm-3.1.2-thairp/rvm/src-generated/opt-burs/jburg/gram.y"
+#line 11 "/home/csse/trash-man/jikesrvm/rvm/src-generated/opt-burs/jburg/gram.y"
 typedef union {
 	int n;
 	char *string;
@@ -1063,54 +1063,54 @@ YYLABEL(yyreduce)
   switch (yyn) {
 
 case 1:
-#line 25 "/home/csse/jikesrvm-3.1.2-thairp/rvm/src-generated/opt-burs/jburg/gram.y"
+#line 25 "/home/csse/trash-man/jikesrvm/rvm/src-generated/opt-burs/jburg/gram.y"
 { yylineno = 0; ;
     break;}
 case 2:
-#line 26 "/home/csse/jikesrvm-3.1.2-thairp/rvm/src-generated/opt-burs/jburg/gram.y"
+#line 26 "/home/csse/trash-man/jikesrvm/rvm/src-generated/opt-burs/jburg/gram.y"
 { yylineno = 0; ;
     break;}
 case 6:
-#line 34 "/home/csse/jikesrvm-3.1.2-thairp/rvm/src-generated/opt-burs/jburg/gram.y"
+#line 34 "/home/csse/trash-man/jikesrvm/rvm/src-generated/opt-burs/jburg/gram.y"
 {
 		if (nonterm(yyvsp[-1].string)->number != 1)
 			yyerror("redeclaration of the start symbol\n");
 		;
     break;}
 case 8:
-#line 39 "/home/csse/jikesrvm-3.1.2-thairp/rvm/src-generated/opt-burs/jburg/gram.y"
+#line 39 "/home/csse/trash-man/jikesrvm/rvm/src-generated/opt-burs/jburg/gram.y"
 { yyerrok; ;
     break;}
 case 10:
-#line 43 "/home/csse/jikesrvm-3.1.2-thairp/rvm/src-generated/opt-burs/jburg/gram.y"
+#line 43 "/home/csse/trash-man/jikesrvm/rvm/src-generated/opt-burs/jburg/gram.y"
 { term(yyvsp[-2].string, yyvsp[0].n); ;
     break;}
 case 12:
-#line 47 "/home/csse/jikesrvm-3.1.2-thairp/rvm/src-generated/opt-burs/jburg/gram.y"
+#line 47 "/home/csse/trash-man/jikesrvm/rvm/src-generated/opt-burs/jburg/gram.y"
 { rule(yyvsp[-5].string, yyvsp[-3].tree, "", yyvsp[-1].string); ;
     break;}
 case 14:
-#line 49 "/home/csse/jikesrvm-3.1.2-thairp/rvm/src-generated/opt-burs/jburg/gram.y"
+#line 49 "/home/csse/trash-man/jikesrvm/rvm/src-generated/opt-burs/jburg/gram.y"
 { yyerrok; ;
     break;}
 case 15:
-#line 52 "/home/csse/jikesrvm-3.1.2-thairp/rvm/src-generated/opt-burs/jburg/gram.y"
+#line 52 "/home/csse/trash-man/jikesrvm/rvm/src-generated/opt-burs/jburg/gram.y"
 { nonterm(yyval.string = yyvsp[0].string); ;
     break;}
 case 16:
-#line 55 "/home/csse/jikesrvm-3.1.2-thairp/rvm/src-generated/opt-burs/jburg/gram.y"
+#line 55 "/home/csse/trash-man/jikesrvm/rvm/src-generated/opt-burs/jburg/gram.y"
 { yyval.tree = tree(yyvsp[0].string,  0,  0); ;
     break;}
 case 17:
-#line 56 "/home/csse/jikesrvm-3.1.2-thairp/rvm/src-generated/opt-burs/jburg/gram.y"
+#line 56 "/home/csse/trash-man/jikesrvm/rvm/src-generated/opt-burs/jburg/gram.y"
 { yyval.tree = tree(yyvsp[-3].string, yyvsp[-1].tree,  0); ;
     break;}
 case 18:
-#line 57 "/home/csse/jikesrvm-3.1.2-thairp/rvm/src-generated/opt-burs/jburg/gram.y"
+#line 57 "/home/csse/trash-man/jikesrvm/rvm/src-generated/opt-burs/jburg/gram.y"
 { yyval.tree = tree(yyvsp[-5].string, yyvsp[-3].tree, yyvsp[-1].tree); ;
     break;}
 case 19:
-#line 60 "/home/csse/jikesrvm-3.1.2-thairp/rvm/src-generated/opt-burs/jburg/gram.y"
+#line 60 "/home/csse/trash-man/jikesrvm/rvm/src-generated/opt-burs/jburg/gram.y"
 { if (*yyvsp[0].string == 0) yyval.string = xstrdup("0"); ;
     break;}
 }
@@ -1317,7 +1317,7 @@ YYLABEL(yyerrhandle)
 /* END */
 
  #line 1038 "/usr/share/bison++/bison.cc"
-#line 62 "/home/csse/jikesrvm-3.1.2-thairp/rvm/src-generated/opt-burs/jburg/gram.y"
+#line 62 "/home/csse/trash-man/jikesrvm/rvm/src-generated/opt-burs/jburg/gram.y"
 
 #include <assert.h>
 #include <stdarg.h>
