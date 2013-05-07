@@ -1,107 +1,89 @@
 trash-man
 =========
+Garbage Collector Readme
 
-garbage collecting fun
+Installing Jikes RVM
 
-First, JikesRVM must be installed. To install it, follow the directions on their website: http://jikesrvm.org/Get+The+Source. After it is installed, make sure that it is working by making sure that all required dependencies are installed from this page: http://jikesrvm.org/Building+the+RVM, and creating a .ant.properties file with the correct host environment (for example, ia32-linux). Afterwards, run bin/buildit localhost BaseBaseNoGC to build a sample virtual machine that has no garbage collector. Run the built machine (located under the dist folder) against a sample program. Any problems that may occur may be solved by the following notes:
+The first step to running the garbage collector is installing the required dependencies. If you run into any issues during this install process, or later on during the use of it, refer to the troubleshooting section at the end of this guide. To install the dependencies, run the following command (this guide was written for Ubuntu 12.10, as of March 2013):
+
+    $ sudo apt-get install mercurial ant gcc g++ gcc-multilib g++-multilib openjdk-6-jdk bison -y
+
+After the dependencies are installed, make sure that you are using the correct version of Java. To do so, run the following command:
+
+    $ sudo update-alternatives --config java
+
+This will bring up a menu with options for versions of java installed on your machine. JikesRVM requires Java 6.
+
+Once all of the dependencies have been satisfied, you can download the virtual machine itself. Follow the guide on Jikes’ website: http://jikesrvm.org/Get+The+Source. Next, go to the folder where you downloaded the virtual machine and create a file named .ant.properties, and add a line in it referencing the type of system you are building on; for example, in our system, the line was:
+host.name=ia32-linux
+You can find the other options for host name and many more things to specify from this guide: http://jikesrvm.org/Building+the+RVM
+
+Finally, you should build and test the rvm. To build the rvm, run the following command from Jikes’ root directory:
+
+    $ ./bin/buildit localhost -t gctest BaseBaseMarkSweep
+
+This should build and test a simple mark sweep collector. To build other collectors, simply change the “BaseBaseMarkSweep” to a different plan (to be explained later). To run a different test, just change “gctest”. To build without testing, remove the -t flag and the test name.
+
+If the build and tests run successfully, you should have a newly built virtual machine, contained in a directory under the dist directory. Simply use the rvm binary in that folder in the same way you would use Java to run programs (i.e., ./dist/{plan_name}_{os_name}/rvm foo, assuming foo is a compiled Java program in Jikes’ root directory).
 
 
-I don't believe my exact series of steps will be particularly helpful. You ought to consider following the Quick Start Guide here: http://jikesrvm.org/Quick+Start+Guide
+Exploring Jikes RVM
 
+Each garbage collector in Jikes is separated into several components. Most of the important classes are located in the org.mmtk package. A high-level overview shows that the organization is divided into the following sections (examples follow in brackets from the example Mark-Sweep collector):
 
-And when you hit an issue, pinpoint the error and google for a solution. The following symptoms and erros that I've experienced were typical of a machine without the proper version of Java, here they are and my approaches to solving them.
-***
-Packages needed:
-$ sudo apt-get install mercurial ant gcc g++ gcc-multilib g++-multilib openjdk-6-jdk -y
-***
-To ensure that you're using the right version of java:
-$ sudo update-alternatives --config java
-This will give you a series of options for a version of java. At the time of writing (11 Mar 2013), Jikes RVM requires version 6.
-***
-If you get an error how java cannot be located and that it's located somewhere in  "use/bin/java/bin/java", then go to your .bashrc or .bash_profile file and add the line
-"export JAVA_HOME=/usr/" at the end and delete any other export command.
-***
+Each garbage collector has both global and thread-local versions of its collector. The global collector is usually named after the type of collector [MS.java], and the local collector usually adds TraceLocal after the name [MSTraceLocal.java]. These are both located in a package specific to that collector [org.mmtk.plan.marksweep].
+
+That package also contains three other classes. Those implement the mutator methods, e.g. allocation, that the plan requires [MSMutator.java], the required things for the collector [MSCollector.java], and any constraints that the collector has that the VM needs to know about [MSConstraints.java].
+
+Each plan also defines its own space. Spaces are an interface between the heap itself and the rest of the virtual machine. They are used to segment the heap into certain areas, and do low-level tasks like determining whether an object is in the space, giving ObjectReferences based on Addresses, and the like. These are located in org.mmtk.policy.
+
+Another interesting class to look at is Phase.java. This class defines all of the phases that the garbage collector goes through when a call is given to collect, and sets up the order in which all of the phases are called.
+
+To get an idea of how the roots are determined for a simple collector, look at the ROOTS and STACK_ROOTS phases inside the SimpleCollector. For transitive closures over the heap, look at the CLOSURE phase in MSCollector.
+
+Troubleshooting the RVM
+
+The following troubleshooting steps are resolutions to problems we encountered during our use of JikesRVM. They are intended as possible solutions to some problems that may arise during installation and use of Jikes, and while we do suggest looking through here first in case we ran into your problem and have done the needed research to fix it, be prepared to google and ask the mailing list (https://lists.sourceforge.net/lists/listinfo/jikesrvm-researchers) for help for problems you run into.
+
+Running a Program Issues
+
+If you get an error how java cannot be located and that it's located somewhere in "usr/bin/java/bin/java", then go to your .bashrc or .bash_profile file and add the line "export JAVA_HOME=/usr/" at the end and delete any other export command.
+
 If something says that a java thing, "java blah", wasn't found, and you're pretty sure that you have java, then there's some config file somewhere pointing to the wrong location. If you want to know the location of your java thing, here's a good way to find where it may be located:
-$ whereis java
+
+    $ whereis java
+
 though you may need something more specific depending on what is missing. Once you figure out where the correct location is, run this command from your current directory to figure out where this incorrect directory for "java blah" is hardcoded:
-$ find . -exec grep -l "java blah" {} \;
+
+    $ find . -exec grep -l "java blah" {} \;
+
 You'll get mostly directories, but you should find a file or a couple that defined this (most likely in an obscure properties file). Go to it, and change that line to the proper java location.
 
+When running a program you may get an error something similar to: Exception in thread "main" java.lang.UnsupportedClassVersionError: Main : Unsupported major.minor version 51.0. Key thing to notice is the error: java.lang.UnsupportedClassVersionError. What this means is that there's a higher JDK during compile time and lower JDK during runtime. update-alternative affected the runtime JDK, but javac is still working with a newer version of java. To remedy this, you must specify source and target versions of java when compiling like so (if Java 6 is being used):
 
+    $ javac -source 1.6 -target 1.6 foo.java
 
+Tutorial Issues
 
+Most of these issues are in the main part of the tutorial, Building the Mark-Sweep Collector.
 
+Free-List Allocation
 
-you must be able to run + compile a java program. since you'll likely need to switch java versions (update alternative), then your compile + run for a test program should go along the lines of
-$ javac foo.java
-$ java foo
-of which you may receive something similar to
-Exception in thread "main" java.lang.UnsupportedClassVersionError: Main : Unsupported major.minor version 51.0
+In the first step: in TutorialConstraints the imports "import org.mmtk.policy.SegregatedFreeListSpace;" and "import org.mmtk.policy.MarkSweepSpace;" must be added. If there are still other import errors, copy over more imports from the marksweep collector (plan/marksweep)
 
+In the second step, DEFAULT_POLL_FREQUENCY is never defined and should be omitted from the constructor.
 
-Key thing to notice is the error: java.lang.UnsupportedClassVersionError
-What this means is that there's a higher JDK during compile time and lower JDK during runtime. update-alternative affected the runtime JDK, but javac is still working with a newer version of java. To remedy this, you must specify source and target versions of java when compiling like so
-$ javac -source 1.6 -target 1.6 foo.java
-assuming java version 1.6 is being used.
+Mark-Sweep Collection
 
+In the second step, there is no need to add the getPagesRequired method.
 
-I addition to the packages listed in Richards notes I also needed Bison
-sudo apt-get install bison
+Hybrid Collector
 
+There is no need to add the precopyObject method.
 
-I wasn't sure about the run configurations for host and config but the following worked:
-ant -Dhost.name=x86_64_m64-linux -Dconfig.name=production_Opt_0
+Miscellaneous Issues
 
+Eclipse has a bug when trying to use a remote connection to use the rvm. To run Eclipse over a remote connection, run the following command (see https://bugs.eclipse.org/bugs/show_bug.cgi?id=386955 for details):
 
-I haven't been able to build the configuration the tutorial requires. I've tried other configurations and changing system settings but so far nothing has worked.
-I can build other configurations (the production congirations) but I have been able to run them. When I test them with HelloWorld they give me seg faults or frame address errors.
+    $ eclipse -vmargs -Dorg.eclipse.swt.internal.gtk.cairoGraphics=false &
 
-
-I had intial trouble building the rvm on the garby linux machine. I discovered this was due to the name change of the directory. Using buildit fixed theses issues.
-Previously we had difficulty getting eclipse to find the project we were supposed to import. I think this was because we didn't get the code from Mercurial. When I did this I was able to get the project. However I still can't open files in eclipse. Also I can't run it from eclipse (run as gives me no options).
-Building the Mark-sweep collector
-There are some errors in the Tutorial for this step. In TutorialConstraints the imports "import org.mmtk.policy.SegregatedFreeListSpace;" and "import org.mmtk.policy.MarkSweepSpace;" must be added. There are other import error in the tutorial. If you don;t know what to import copy the imports of the marksweep collector (plan/marksweep)
-Also DEFAULT_POLL_FREQUENCY is never defined and should be omitted from the constructor.
-Step 4 of mark sweep colection has MS where it should have Tutorial in the code
-Step 2 has you add:
-@Override
-public int getPagesRequired() {
-  return super.getPagesRequired() + msSpace.requiredPages();
-}
-This is wrong. Ignore it. The functionality is covered by getPagesUsed().
-See http://old.nabble.com/-rvm-research--Building-a-Mark-sweep-Collector-Tutorial-tt34795967.html#a34795967
-In the Hybrid Collector section theysay to add the following th TraceLocal:
-@Override
-    public ObjectReference precopyObject(ObjectReference object) {
-    if (object.isNull()) return object;
-    else if (Space.isInSpace(Tutorial.NURSERY, object))
-        return Tutorial.nurserySpace.traceObject(this, object, Tutorial.ALLOC_DEFAULT);
-    else
-        return object;
-}
-However, the superclass method does not exist. After checking with the super class and other collectors (the generational collector example) I couldn't find anywhere to put this code, so I left it out.
-
-
-The resulting collector built, tested and ran successfully.
-
-
-I installed on Ubuntu 12.10
-
-
-First I ran sudo apt-get install mercurial ant gcc g++ gcc-multilib g++-multilib openjdk-6-jdk -y to get all the necessary additional packages and used mercurial to download the repository located at http://hg.code.sourceforge.net/p/jikesrvm/code
-I then switched directories into the "jikesrvm" directory, and created a .ant.properties file, which I added host.name=x86_64-linux and config.name=development to, and then ran ant to build the VM. Afterwords, I added the executable (located in jikesrvm/dist/development_x86_64-linux) to my path, so I could run rvm anywhere.
-
-
-I managed to get Eclipse working; the problem is a bug in Cairo (see https://bugs.eclipse.org/bugs/show_bug.cgi?id=386955 for details); to run eclipse you must run eclipse -vmargs -Dorg.eclipse.swt.internal.gtk.cairoGraphics=false
-
-
-I still have not found a way to use run configuration in Eclipse, but that does not seem necessary to running it (just use the manual commands).
-
-
-When making the tutorial package, copy/pasting the NoGC package in Eclipse will prompt with a rename, to allow for easy creation.
-
-
-When changing the ImmortalSpace to the MarkSweepSpace in Tutorial.java, there is no need to pass in the DEFAULT_POLL_FREQUENCY anymore; the constructor only takes two parameters.
-
-
-When the tutorial asks to add a new accounting method (getPagesRequired), that has since been deprecated (I think), and the getPagesUsed method already implemented should work.
